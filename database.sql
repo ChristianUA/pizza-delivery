@@ -8,6 +8,7 @@ CREATE TABLE `users` (
     `first_name` varchar(100) DEFAULT NULL,
     `last_name` varchar(100) DEFAULT NULL,
     `address_id` int(11) DEFAULT NULL,
+    `password_hash` char(60) DEFAULT NULL,
     PRIMARY KEY (`id`)
 );
 
