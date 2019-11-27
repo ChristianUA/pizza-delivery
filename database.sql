@@ -5,6 +5,7 @@ USE final_project;
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
     `id` int(11) NOT NULL DEFAULT '0',
+    `email` varchar(320) DEFAULT NULL,
     `first_name` varchar(100) DEFAULT NULL,
     `last_name` varchar(100) DEFAULT NULL,
     `address_id` int(11) DEFAULT NULL,
