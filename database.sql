@@ -4,7 +4,7 @@ USE final_project;
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-    `id` int(11) NOT NULL DEFAULT '0',
+    `id` int(11) NOT NULL AUTO_INCREMENT,
     `email` varchar(320) DEFAULT NULL,
     `first_name` varchar(100) DEFAULT NULL,
     `last_name` varchar(100) DEFAULT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `pizzas` (
 
 DROP TABLE IF EXISTS `addresses`;
 CREATE TABLE `addresses` (
-    `id` int(11) NOT NULL DEFAULT '0',
+    `id` int(11) NOT NULL AUTO_INCREMENT,
     `street_address` varchar(100) DEFAULT NULL,
     `city` varchar(100) DEFAULT NULL,
     `state` varchar(100) DEFAULT NULL,
@@ -44,9 +44,9 @@ insert into pizzas values (1, 'Cheese', 'None', 'M');
 insert into pizzas values (2, 'Pepperoni', 'Pepperoni', 'M');
 insert into pizzas values (3,  'Veggie', 'Vegetables', 'M');
 
-insert into users values (1, 'Devanshi', 'Chavda', 1);
-insert into users values (2, 'Christian', 'Peterson', 2);
-insert into users values(3, 'Rick', 'Mercer', 3);
+insert into users values ('Devanshi', 'Chavda', 1);
+insert into users values ('Christian', 'Peterson', 2);
+insert into users values('Rick', 'Mercer', 3);
 
 insert into orders values (1, 1, 2);
 insert into orders values (2, 1, 1);
