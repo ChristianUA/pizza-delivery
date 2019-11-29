@@ -28,7 +28,55 @@
                 <a class="btn btn-outline-primary" href="./register.php">Register</a>
               </div>
             </nav>
+            <h2 class="title m-4">Pizzas</h2>
+            <div class="row row-cols-3 row-cols-md-2">
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                              <img src="images/cheese.jpg" class="card-img" alt="Cheese pizza">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <form action="controller.php?mode=cart" method="post">
+                                        <h5 class="card-title">Cheese pizza</h5>
+                                        <p class="card-text">Delicious brick-oven pizza, covered in fresh mozzarella cheese.</p>
+                                        <div class="form-row">
+                                            <div class="col-md-3 mb-3">
+                                                <label for="size">Size</label>
+                                                <select class="custom-select custom-select-sm" name="size" required>
+                                                  <option value="S" selected>Small</option>
+                                                  <option value="M">Medium</option>
+                                                  <option value="L">Large</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary" type="submit">Add to cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <script>
+            var ajax = new XMLHttpRequest();
+            ajax.open("GET", "controller.php?mode=view", true);
+            ajax.send();
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    var array = JSON.parse(ajax.responseText);
+                    var str = "<ol>";
+                    for (var index = 0; index < array.length; index++) {
+                        str += "<li>" + array[index] + "</li>";
+                    }
+                    str += "</ol>";
+                    elementToChange.innerHTML = str;
+                } // End if
+            }; // End anonymous function
+        </script>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
