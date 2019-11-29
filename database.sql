@@ -18,6 +18,7 @@ CREATE TABLE `orders` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `user_id` int(11) DEFAULT NULL,
     `pizza_id` int(11) DEFAULT NULL,
+    `size` varchar(1) DEFAULT NULL,
     PRIMARY KEY (`id`)
 );
 
@@ -26,7 +27,7 @@ CREATE TABLE `pizzas` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `name` varchar(100) DEFAULT NULL,
     `toppings` varchar(100) DEFAULT NULL,
-    `size` varchar(1) DEFAULT NULL,
+    `description` varchar(320) DEFAULT NULL,
     PRIMARY KEY (`id`)
 );
 
