@@ -46,5 +46,18 @@ class DatabaseAdaptor {
         }
         return False;
     }
+
+    public function getOrders($email) {
+        // User must already be verified
+        $stmt = $this->DB->prepare("SELECT * FROM orders WHERE email=?");
+        $stmt->execute([$email]);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getPizzas() {
+        $stmt = $this->DB->prepare("SELECT * FROM pizzas");
+        $stmt->execute([$email]);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>
