@@ -1,5 +1,5 @@
 <?php
-include 'adaptor.php';
+include 'database.php';
 session_start();
 $database = new DatabaseAdaptor();
 
@@ -36,6 +36,15 @@ if(isset($_GET['mode'])) {
             $_SESSION ['loginError'] = 'Invalid Account/Password';
             header("Location: ./login.php?mode=login");
         }
+    }
+    elseif ($_GET['mode'] == "view") {
+        $pizzas = $database->getPizzas();
+        echo json_encode($pizzas);
+    }
+    elseif ($_GET['mode'] == "cart") {
+        // TODO: Add selection to user cart stored in array in the SESSION
+        echo $_POST['size'];
+        // Only add to cart if user is signed in
     }
 }
 
