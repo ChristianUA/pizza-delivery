@@ -60,6 +60,67 @@
                     </div>
                 </div>
             </div>
+            <div class="row row-cols-3 row-cols-md-2">
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                              <img src="images/pepperoni.jpeg" class="card-img" alt="Pepperoni pizza">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <form action="controller.php?mode=cart" method="post">
+                                        <h5 class="card-title">Pepperoni pizza</h5>
+                                        <p class="card-text">Delicious brick-oven pizza, covered in fresh mozzarella cheese and pepperoni slices.</p>
+                                        <div class="form-row">
+                                            <div class="col-md-3 mb-3">
+                                                <label for="size">Size</label>
+                                                <select class="custom-select custom-select-sm" name="size" required>
+                                                  <option value="S" selected>Small</option>
+                                                  <option value="M">Medium</option>
+                                                  <option value="L">Large</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary" type="submit">Add to cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-cols-3 row-cols-md-2">
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                              <img src="images/veggie.jpg" class="card-img" alt="Veggie pizza">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <form action="controller.php?mode=cart" method="post">
+                                        <h5 class="card-title">Veggie pizza</h5>
+                                        <p class="card-text">Delicious brick-oven pizza, covered in black olives, bell peppers, cherry tomatoes, and mushroom.</p>
+                                        <div class="form-row">
+                                            <div class="col-md-3 mb-3">
+                                                <label for="size">Size</label>
+                                                <select class="custom-select custom-select-sm" name="size" required>
+                                                  <option value="S" selected>Small</option>
+                                                  <option value="M">Medium</option>
+                                                  <option value="L">Large</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary" type="submit">Add to cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <script>
