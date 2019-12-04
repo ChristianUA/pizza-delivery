@@ -24,6 +24,7 @@ class DatabaseAdaptor {
     }
 
     public function registerUser($email, $first_name, $last_name, $address_id, $hashed_password) {
+        // TODO: Check if email address already exists
         // Create user
         $stmt = $this->DB->prepare("INSERT INTO users (email, first_name, last_name, address_id, password_hash) VALUES (?, ?, ?, ?, ?);");
         $stmt->execute([$email, $first_name, $last_name, $address_id, $hashed_password]);

@@ -5,6 +5,8 @@ $database = new DatabaseAdaptor();
 
 if(isset($_GET['mode'])) {
     if ($_GET['mode'] == "register") {
+        // TODO: Add htmlspecialchars() on all user input
+
         // Add user record to register
         $email = $_POST['email'];
         $first_name = $_POST['first_name'];
@@ -24,6 +26,8 @@ if(isset($_GET['mode'])) {
         header("Location: index.html");
     }
     elseif ($_GET['mode'] == "login") {
+        // TODO: Add htmlspecialchars() on all user input
+        
         // check if user is valid
         $email = $_POST['email'];
         $password = $_POST['password'];
