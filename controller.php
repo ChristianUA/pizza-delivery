@@ -19,13 +19,17 @@ if(isset($_GET['mode'])) {
         $zip = htmlspecialchars($_POST['zip']);
         $address_id = $database->addAddress($street_address, $city, $state, $zip);
 
-        $database->registerUser($email, $first_name, $last_name, $address_id, $hashed_password);
-        // Redirect user to homepage
-        header("Location: index.html");
+        if(! $database->userExists($email)) {
+            $database->registerUser($email, $first_name, $last_name, $address_id, $hashed_password);
+            // Redirect user to homepage
+            header("Location: index.html");
+        }
+        else {
+            $_SESSION ['registrationError'] = 'Email address taken.';
+            header("Location: ./register.php");
+        }
     }
     elseif ($_GET['mode'] == "login") {
-        // TODO: Add htmlspecialchars() on all user input
-
         // check if user is valid
         $email = htmlspecialchars($_POST['email']);
         $password = htmlspecialchars($_POST['password']);
