@@ -58,7 +58,7 @@
                       </div>
                       <?php
                           if(isset($_SESSION ['registrationError'])) {
-                              echo $_SESSION ['registrationError'];
+                              echo '<div class="alert alert-danger col-md-12" role="alert">' . $_SESSION['registrationError'] . '</div>';
                               unset($_SESSION ['registrationError']);
                           };
                       ?>
