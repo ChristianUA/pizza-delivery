@@ -57,7 +57,7 @@ class DatabaseAdaptor {
 
     public function getPizzas() {
         $stmt = $this->DB->prepare("SELECT * FROM pizzas");
-        $stmt->execute([$email]);
+        $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
