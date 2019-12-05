@@ -5,20 +5,18 @@ $database = new DatabaseAdaptor();
 
 if(isset($_GET['mode'])) {
     if ($_GET['mode'] == "register") {
-        // TODO: Add htmlspecialchars() on all user input
-
         // Add user record to register
-        $email = $_POST['email'];
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $password = $_POST['password'];
+        $email = htmlspecialchars($_POST['email']);
+        $first_name = htmlspecialchars($_POST['first_name']);
+        $last_name = htmlspecialchars($_POST['last_name']);
+        $password = htmlspecialchars($_POST['password']);
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Add address record and get id
-        $street_address = $_POST['street_address'];
-        $city = $_POST['city'];
-        $state = $_POST['state'];
-        $zip = $_POST['zip'];
+        $street_address = htmlspecialchars($_POST['street_address']);
+        $city = htmlspecialchars($_POST['city']);
+        $state = htmlspecialchars($_POST['state']);
+        $zip = htmlspecialchars($_POST['zip']);
         $address_id = $database->addAddress($street_address, $city, $state, $zip);
 
         $database->registerUser($email, $first_name, $last_name, $address_id, $hashed_password);
@@ -27,10 +25,10 @@ if(isset($_GET['mode'])) {
     }
     elseif ($_GET['mode'] == "login") {
         // TODO: Add htmlspecialchars() on all user input
-        
+
         // check if user is valid
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $email = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
         if ($database->verifyUser($email, $password)) {
             // Store session data so the account name isset and known on any page
             $_SESSION ['user'] = $email;
