@@ -19,7 +19,7 @@
                       <div class="form-row">
                           <div class="col-md-12 mb-3">
                               <label for="email">Email address</label>
-                              <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                              <input pattern="^[a-zA-Z_\-]+@(([a-zA-Z_\-])+\.)+[a-zA-Z]{2,4}$" type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                           </div>
                       </div>
                       <div class="form-row">
