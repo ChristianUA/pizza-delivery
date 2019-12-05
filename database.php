@@ -26,17 +26,36 @@ class DatabaseAdaptor {
     public function registerUser($email, $first_name, $last_name, $address_id, $hashed_password) {
         // TODO: Check if email address already exists
         // Create user
-        $stmt = $this->DB->prepare("INSERT INTO users (email, first_name, last_name, address_id, password_hash) VALUES (?, ?, ?, ?, ?);");
-        $stmt->execute([$email, $first_name, $last_name, $address_id, $hashed_password]);
+        $stmt = $this->DB->prepare("INSERT INTO users (email, first_name, last_name, address_id, password_hash) VALUES (:email, :first_name, :last_name, :address_id, :password_hash);");
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':first_name', $first_name);
+        $stmt->bindParam(':last_name', $last_name);
+        $stmt->bindParam(':address_id', $address_id);
+        $stmt->bindParam(':password_hash', $hashed_password);
+        $stmt->execute();
+    }
+
+    public function userExists($email) {
+        $stmt = $this->DB->prepare("SELECT email FROM users WHERE email=:email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if(empty($results)) {
+            return False;
+        }
+        else {
+            return True;
+        }
     }
 
     public function verifyUser($email, $password) {
         // Return true if user exists in database and password matches
-        $stmt = $this->DB->prepare("SELECT password_hash FROM users WHERE email=?");
-        $stmt->execute([$email]);
+        $stmt = $this->DB->prepare("SELECT password_hash FROM users WHERE email=:email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if(count($results) == 1) {
+        if(!empty($results)) {
             // select password_hash from first result
             $password_hash = $results[0]['password_hash'];
 
@@ -50,8 +69,9 @@ class DatabaseAdaptor {
 
     public function getOrders($email) {
         // User must already be verified
-        $stmt = $this->DB->prepare("SELECT * FROM orders WHERE email=?");
-        $stmt->execute([$email]);
+        $stmt = $this->DB->prepare("SELECT * FROM orders WHERE email=:email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
