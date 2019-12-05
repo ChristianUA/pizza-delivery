@@ -24,6 +24,7 @@
                 </ul>
 
                 <nav class="my-2 my-md-0 mr-md-3">
+                    <a class="p-2 text-dark" href="./cart.php">Cart</a>
                     <a class="p-2 text-dark" href="./login.php">Login</a>
                 </nav>
                 <a class="btn btn-outline-primary" href="./register.php">Register</a>
@@ -40,6 +41,7 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <form action="controller.php?mode=cart" method="post">
+                                        <input type="hidden" name="pizza" value="cheese"/>
                                         <h5 class="card-title">Cheese pizza</h5>
                                         <p class="card-text">Delicious brick-oven pizza, covered in fresh mozzarella cheese.</p>
                                         <div class="form-row">
@@ -68,6 +70,7 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <form action="controller.php?mode=cart" method="post">
+                                        <input type="hidden" name="pizza" value="pepperoni"/>
                                         <h5 class="card-title">Pepperoni pizza</h5>
                                         <p class="card-text">Delicious brick-oven pizza, covered in fresh mozzarella cheese and pepperoni slices.</p>
                                         <div class="form-row">
@@ -96,6 +99,7 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <form action="controller.php?mode=cart" method="post">
+                                        <input type="hidden" name="pizza" value="veggie"/>
                                         <h5 class="card-title">Veggie pizza</h5>
                                         <p class="card-text">Delicious brick-oven pizza, covered in black olives, bell peppers, cherry tomatoes, and mushroom.</p>
                                         <div class="form-row">
@@ -120,6 +124,7 @@
         </div>
 
         <script>
+            // Get pizzas from database
             var ajax = new XMLHttpRequest();
             ajax.open("GET", "controller.php?mode=view", true);
             ajax.send();
@@ -134,6 +139,8 @@
                     elementToChange.innerHTML = str;
                 } // End if
             }; // End anonymous function
+
+
         </script>
 
         <!-- Optional JavaScript -->
