@@ -80,5 +80,14 @@ class DatabaseAdaptor {
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function addToCart($pizza, $size) {
+        if(isset($_SESSION['cart'])) {
+            array_push($_SESSION['cart'], array($pizza, $size));
+        }
+        else {
+            $_SESSION['cart'] = array(array($pizza, $size));
+        }
+    }
 }
 ?>
