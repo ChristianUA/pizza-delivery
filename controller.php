@@ -22,7 +22,7 @@ if(isset($_GET['mode'])) {
         if(! $database->userExists($email)) {
             $database->registerUser($email, $first_name, $last_name, $address_id, $hashed_password);
             // Redirect user to homepage
-            header("Location: index.html");
+            header("Location: index.php");
         }
         else {
             $_SESSION ['registrationError'] = 'Email address taken.';
@@ -35,13 +35,17 @@ if(isset($_GET['mode'])) {
         $password = htmlspecialchars($_POST['password']);
         if ($database->verifyUser($email, $password)) {
             // Store session data so the account name isset and known on any page
-            $_SESSION ['user'] = $email;
+            $_SESSION['user'] = $email;
             // Redirect user to homepage
-            header("Location: index.html");
+            header("Location: index.php");
         } else {
             $_SESSION ['loginError'] = 'Invalid Account/Password';
             header("Location: ./login.php?mode=login");
         }
+    }
+    elseif ($_GET['mode'] == "logout") {
+        unset($_SESSION['user']);
+        header("Location: index.php");
     }
     elseif ($_GET['mode'] == "view") {
         $pizzas = $database->getPizzas();
@@ -51,7 +55,7 @@ if(isset($_GET['mode'])) {
         // Only add to cart if user is signed in
         if(isset($_SESSION['user'])) {
             $database->addToCart($_POST['pizza'], $_POST['size']);
-            header("Location: index.html");
+            header("Location: index.php");
         }
         else {
             $_SESSION ['loginError'] = 'Please sign in to add to cart.';
@@ -70,7 +74,7 @@ if(isset($_GET['mode'])) {
     elseif ($_GET['mode'] == "order") {
         $database->orderPizzas();
         unset($_SESSION['cart']);
-        header("Location: index.html");
+        header("Location: index.php");
     }
     elseif ($_GET['mode'] == "orders") {
         if(isset($_SESSION['user'])) {

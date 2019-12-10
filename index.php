@@ -9,6 +9,9 @@
 
     </head>
     <body onload="getPizzas()">
+        <?php
+            session_start();
+        ?>
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
               <a class="navbar-brand" href="#">Pizza Delivery</a>
@@ -24,11 +27,20 @@
                 </ul>
 
                 <nav class="my-2 my-md-0 mr-md-3">
-                    <a class="p-2 text-dark" href="#" onclick="getOrders()">Orders</a>
-                    <a class="p-2 text-dark" href="#" onclick="getCart()">Cart</a>
-                    <a class="p-2 text-dark" href="./login.php">Login</a>
+                    <?php
+                        if(isset($_SESSION['user'])) {
+                            echo '<a class="p-2 text-dark" href="#" onclick="getOrders()">Orders</a><a class="p-2 text-dark" href="#" onclick="getCart()">Cart</a><a class="p-2 text-dark" href="./controller.php?mode=logout">Logout</a>';
+                        }
+                        else {
+                            echo '<a class="p-2 text-dark" href="./login.php">Login</a>';
+                        };
+                    ?>
                 </nav>
-                <a class="btn btn-outline-primary" href="./register.php">Register</a>
+                <?php
+                    if(!isset($_SESSION['user'])) {
+                        echo '<a class="btn btn-outline-primary" href="./register.php">Register</a>';
+                    }
+                ?>
               </div>
             </nav>
             <h2 class="title m-4" id="title"></h2>
