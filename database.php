@@ -1,4 +1,6 @@
 <?php
+
+// <!-- Christian Peterson and Devanshi Chavda -->
 class DatabaseAdaptor {
     private $DB; // The instance variable used in every method
     // Connect to an existing data based named 'first'

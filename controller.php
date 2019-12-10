@@ -1,4 +1,6 @@
 <?php
+
+// <!-- Christian Peterson and Devanshi Chavda -->
 include 'database.php';
 session_start();
 $database = new DatabaseAdaptor();
