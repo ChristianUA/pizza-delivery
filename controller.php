@@ -48,9 +48,15 @@ if(isset($_GET['mode'])) {
         echo json_encode($pizzas);
     }
     elseif ($_GET['mode'] == "cart") {
-        // TODO: Add selection to user cart stored in array in the SESSION
-        echo $_POST['size'];
         // Only add to cart if user is signed in
+
+        // TODO: Add selection to user cart stored in array in the SESSION
+        if(isset($_SESSION['cart'])) {
+            array_push($_SESSION['cart'], array($_POST['pizza'], $_POST['size']));
+        }
+        else {
+            $_SESSION['cart'] = array(array($_POST['pizza'], $_POST['size']));
+        }
     }
 }
 
