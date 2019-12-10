@@ -24,6 +24,7 @@
                 </ul>
 
                 <nav class="my-2 my-md-0 mr-md-3">
+                    <a class="p-2 text-dark" href="#" onclick="getOrders()">Orders</a>
                     <a class="p-2 text-dark" href="#" onclick="getCart()">Cart</a>
                     <a class="p-2 text-dark" href="./login.php">Login</a>
                 </nav>
@@ -97,6 +98,53 @@
                             var name = array[index][0];
                             var size = array[index][1];
                             var description = array[index][2];
+                            document.getElementById("divtoChange").innerHTML += `<div class="col mb-4">
+                                <div class="card">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-4">
+                                          <img src="images/` + name + `.jpg" class="card-img" alt="` + name + ` pizza">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <form>
+                                                    <fieldset disabled>
+                                                        <h5 class="card-title">` + name + ` pizza</h5>
+                                                        <p class="card-text">` + description + `</p>
+                                                        <div class="form-row">
+                                                                <div class="col-md-3 mb-3">
+                                                                    <label for="size">Size</label>
+                                                                    <select class="custom-select custom-select-sm" name="size" required>
+                                                                      <option selected>` + size + `</option>
+                                                                    </select>
+                                                                </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                        }
+                        document.getElementById("divtoChange").insertAdjacentHTML('afterend', '<form action="controller.php?mode=order" method="post"><button class="btn btn-primary" type="submit">Submit Order</button></form>');
+                    } // End if
+                }; // End anonymous function
+            };
+
+            function getOrders() {
+                document.getElementById("title").innerHTML = "Orders";
+                document.getElementById("divtoChange").innerHTML = "";
+                // Get pizzas from database
+                var ajax = new XMLHttpRequest();
+                ajax.open("GET", "controller.php?mode=orders", true);
+                ajax.send();
+                ajax.onreadystatechange = function () {
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        var array = JSON.parse(ajax.responseText);
+                        for (var index = 0; index < array.length; index++) {
+                            var name = array[index]['name'];
+                            var size = array[index]['size'];
+                            var description = array[index]['description'];
                             document.getElementById("divtoChange").innerHTML += `<div class="col mb-4">
                                 <div class="card">
                                     <div class="row no-gutters">

@@ -51,7 +51,7 @@ if(isset($_GET['mode'])) {
         // Only add to cart if user is signed in
         if(isset($_SESSION['user'])) {
             $database->addToCart($_POST['pizza'], $_POST['size']);
-            header("Location: cart.html");
+            header("Location: index.html");
         }
         else {
             $_SESSION ['loginError'] = 'Please sign in to add to cart.';
@@ -61,6 +61,20 @@ if(isset($_GET['mode'])) {
     elseif ($_GET['mode'] == "cart") {
         if(isset($_SESSION['user'])) {
             echo json_encode($database->getCart());
+        }
+        else {
+            $_SESSION ['loginError'] = 'Please sign in to view your cart.';
+            header("Location: ./login.php?mode=login");
+        }
+    }
+    elseif ($_GET['mode'] == "order") {
+        $database->orderPizzas();
+        unset($_SESSION['cart']);
+        header("Location: index.html");
+    }
+    elseif ($_GET['mode'] == "orders") {
+        if(isset($_SESSION['user'])) {
+            echo json_encode($database->getOrders($_SESSION['user']));
         }
         else {
             $_SESSION ['loginError'] = 'Please sign in to view your cart.';

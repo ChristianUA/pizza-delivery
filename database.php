@@ -69,10 +69,34 @@ class DatabaseAdaptor {
 
     public function getOrders($email) {
         // User must already be verified
-        $stmt = $this->DB->prepare("SELECT * FROM orders WHERE email=:email");
+        $stmt = $this->DB->prepare("SELECT pizzas.name, pizzas.description, orders.size FROM orders JOIN users on orders.user_id = users.id JOIN pizzas on orders.pizza_id = pizzas.id WHERE users.email=:email;");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function orderPizzas() {
+        foreach ($_SESSION['cart'] as $pizza) {
+            $name = $pizza[0];
+            $size = $pizza[1];
+            $user = $_SESSION['user'];
+
+            $stmt = $this->DB->prepare("SELECT id FROM pizzas WHERE name=:pizza");
+            $stmt->bindParam(':pizza', $name);
+            $stmt->execute();
+            $pizzaID = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $stmt = $this->DB->prepare("SELECT id FROM users WHERE email=:email");
+            $stmt->bindParam(':email', $user);
+            $stmt->execute();
+            $userID = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $stmt = $this->DB->prepare("INSERT INTO orders (user_id, pizza_id, size) VALUES (:user_id, :pizza_id, :size);");
+            $stmt->bindParam(':user_id', $userID[0]['id']);
+            $stmt->bindParam(':pizza_id', $pizzaID[0]['id']);
+            $stmt->bindParam(':size', $size);
+            $stmt->execute();
+        }
     }
 
     public function getPizzas() {

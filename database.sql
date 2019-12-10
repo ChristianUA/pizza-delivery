@@ -18,7 +18,7 @@ CREATE TABLE `orders` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `user_id` int(11) DEFAULT NULL,
     `pizza_id` int(11) DEFAULT NULL,
-    `size` varchar(1) DEFAULT NULL,
+    `size` varchar(10) DEFAULT NULL,
     PRIMARY KEY (`id`)
 );
 
