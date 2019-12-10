@@ -41,18 +41,6 @@ CREATE TABLE `addresses` (
     PRIMARY KEY (`id`)
 );
 
-insert into pizzas values ('Cheese', 'None', 'M');
-insert into pizzas values ('Pepperoni', 'Pepperoni', 'M');
-insert into pizzas values ('Veggie', 'Vegetables', 'M');
-
-insert into users values ('Devanshi', 'Chavda', 1);
-insert into users values ('Christian', 'Peterson', 2);
-insert into users values('Rick', 'Mercer', 3);
-
-insert into orders values (1, 2);
-insert into orders values (1, 1);
-insert into orders values (2, 2);
-
-insert into addresses values ('101 N Way Rd.', 'Tucson', 'Arizona', 85719);
-insert into addresses values ('5 Central St.', 'Tucson', 'Arizona', 85719);
-insert into addresses values ('26 E Greenway Rd.', 'Tucson', 'Arizona', 85719);
+insert into pizzas (name, toppings, description) values ('Cheese', 'None', 'Delicious brick-oven pizza, covered in fresh mozzarella cheese.');
+insert into pizzas (name, toppings, description) values ('Pepperoni', 'Pepperoni', 'Delicious brick-oven pizza, covered in fresh mozzarella cheese and pepperoni slices.');
+insert into pizzas (name, toppings, description) values ('Veggie', 'Vegetables', 'Delicious brick-oven pizza, covered in black olives, bell peppers, cherry tomatoes, and mushroom.');

@@ -72,21 +72,30 @@ class DatabaseAdaptor {
         $stmt = $this->DB->prepare("SELECT * FROM orders WHERE email=:email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getPizzas() {
-        $stmt = $this->DB->prepare("SELECT * FROM pizzas");
+        $stmt = $this->DB->prepare("SELECT name, toppings, description FROM pizzas");
         $stmt->execute();
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getCart() {
+        return $_SESSION['cart'];
     }
 
     public function addToCart($pizza, $size) {
+        $stmt = $this->DB->prepare("SELECT description FROM pizzas WHERE name=:pizza");
+        $stmt->bindParam(':pizza', $pizza);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         if(isset($_SESSION['cart'])) {
-            array_push($_SESSION['cart'], array($pizza, $size));
+            array_push($_SESSION['cart'], array($pizza, $size, $results[0]['description']));
         }
         else {
-            $_SESSION['cart'] = array(array($pizza, $size));
+            $_SESSION['cart'] = array(array($pizza, $size, $results[0]['description']));
         }
     }
 }

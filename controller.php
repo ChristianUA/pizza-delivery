@@ -47,17 +47,25 @@ if(isset($_GET['mode'])) {
         $pizzas = $database->getPizzas();
         echo json_encode($pizzas);
     }
-    elseif ($_GET['mode'] == "cart") {
+    elseif ($_GET['mode'] == "add") {
         // Only add to cart if user is signed in
-
-        // TODO: Add selection to user cart stored in array in the SESSION
-        if(isset($_SESSION['cart'])) {
-            array_push($_SESSION['cart'], array($_POST['pizza'], $_POST['size']));
+        if(isset($_SESSION['user'])) {
+            $database->addToCart($_POST['pizza'], $_POST['size']);
+            header("Location: cart.html");
         }
         else {
-            $_SESSION['cart'] = array(array($_POST['pizza'], $_POST['size']));
+            $_SESSION ['loginError'] = 'Please sign in to add to cart.';
+            header("Location: ./login.php?mode=login");
+        }
+    }
+    elseif ($_GET['mode'] == "cart") {
+        if(isset($_SESSION['user'])) {
+            echo json_encode($database->getCart());
+        }
+        else {
+            $_SESSION ['loginError'] = 'Please sign in to view your cart.';
+            header("Location: ./login.php?mode=login");
         }
     }
 }
-
 ?>
